@@ -30,7 +30,7 @@
     -   最初の2枚で21（ブラックジャック）は、ヒットして21になった場合よりも強いです。
 
 ## 遊び方
-you-sk/web-black-jack
+
 1.  このリポジトリをクローンまたはダウンロードします。
     ```bash
     git clone https://github.com/you-sk/web-black-jack.git
