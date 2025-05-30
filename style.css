@@ -1,0 +1,224 @@
+/* 基本的なスタイル */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #1a3a1a; /* 深い緑色 */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 上寄せに変更してスクロールに対応 */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    background-color: #2c5c2c; /* やや明るい緑 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffc107; /* ゴールド */
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* メッセージエリア */
+#message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 30px; /* メッセージの高さ分のスペースを確保 */
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* カードと手札エリアのスタイル */
+.hand-area {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    min-height: 150px; /* 手札エリアの最小の高さを確保 */
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap; /* カードが多くなった場合に折り返す */
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* カード間の隙間 */
+    min-height: 105px; /* カード表示エリアの最小の高さを確保 */
+}
+
+.card {
+    width: 70px;
+    height: 100px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem; /* カードの数字のフォントサイズ */
+    font-weight: bold;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card .suit {
+    font-size: 1.5rem; /* スートのフォントサイズ */
+    position: absolute; /* 中央に配置しやすくするため */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card .rank {
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    font-size: 1.2rem;
+}
+.card .rank.bottom {
+    top: auto;
+    bottom: 5px;
+    right: 7px;
+    left: auto;
+    transform: rotate(180deg); /* 下のランクは180度回転 */
+}
+
+
+/* スペードとクラブの色を黒に */
+.card.spades .suit, .card.clubs .suit {
+    color: #000000;
+}
+
+/* ハートとダイヤの色を赤に */
+.card.hearts .suit, .card.diamonds .suit {
+    color: #ff0000;
+}
+
+/* 裏向きのカード */
+.card.hidden-card {
+    background-color: #5a98de; /* 青系の背景 */
+    background-image: repeating-linear-gradient(
+        45deg,
+        #4a88ce,
+        #4a88ce 10px,
+        #5a98de 10px,
+        #5a98de 20px
+    );
+    color: transparent; /* 文字を透明に */
+}
+.card.hidden-card .suit, .card.hidden-card .rank {
+    display: none; /* 裏向きのカードはスートとランクを非表示 */
+}
+
+
+/* 操作ボタンのスタイル */
+.controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* ボタン間の隙間 */
+    flex-wrap: wrap; /* スマホ表示で折り返す */
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px); /* ホバー時に少し浮き上がる効果 */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#start-button {
+    background-color: #ffc107; /* ゴールド */
+    color: #000;
+}
+
+#start-button:hover:not(:disabled) {
+    background-color: #ffca2c;
+}
+
+#hit-button {
+    background-color: #28a745; /* 緑 */
+    color: #fff;
+}
+
+#hit-button:hover:not(:disabled) {
+    background-color: #2ebf4f;
+}
+
+#stand-button {
+    background-color: #dc3545; /* 赤 */
+    color: #fff;
+}
+
+#stand-button:hover:not(:disabled) {
+    background-color: #e44d5c;
+}
+
+button:disabled {
+    background-color: #6c757d; /* グレー */
+    color: #adb5bd;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.hidden {
+    display: none !important; /* hiddenクラスは確実に非表示にする */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* スマホではパディングを小さく */
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .card {
+        width: 60px;
+        height: 90px;
+        font-size: 1.5rem; /* スマホでのカード数字サイズ */
+    }
+    .card .suit {
+        font-size: 1.3rem; /* スマホでのスートサイズ */
+    }
+    .card .rank {
+        font-size: 1rem; /* スマホでのランクサイズ */
+    }
+    .cards {
+        min-height: 95px;
+        gap: 5px; /* スマホではカード間の隙間を少し詰める */
+    }
+    .controls {
+        gap: 10px; /* スマホではボタン間の隙間を少し詰める */
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
